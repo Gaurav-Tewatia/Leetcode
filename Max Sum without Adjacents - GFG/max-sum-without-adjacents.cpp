@@ -26,6 +26,7 @@ int solve(int *height,int n){
   }
   */
   
+  /*
   int solve(int *height,int n,int *dp){
       if(n<0)
       return 0;
@@ -38,10 +39,27 @@ int solve(int *height,int n){
       dp[n]=max(solve(height,n-2,dp)+height[n],solve(height,n-1,dp));
       return dp[n];
   }
+  */
+  //
+  int solve(int *height, int n){
+      int dp[n];
+      dp[0]=height[0];
+      
+      for(int i=1;i<n;i++){
+          int pick=height[i];
+          if(i>1)
+          pick+=dp[i-2];
+          int notpick=dp[i-1];
+          
+          dp[i]=max(pick,notpick);
+        }
+        
+        return dp[n-1];
+  }
 	int findMaxSum(int *arr, int n) {
 	   int dp[n];
 	   memset(dp,-1,sizeof(dp));
-	   return solve(arr,n-1,dp);
+	   return solve(arr,n);
 	}
 };
 
