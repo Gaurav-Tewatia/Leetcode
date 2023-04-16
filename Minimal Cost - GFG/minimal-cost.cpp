@@ -4,35 +4,39 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution {
   public:
     
-    int solve(vector<int> &height,int n, int k,int *dp){
-                if(n==0)
-        return 0;
+    int solve(vector<int> &height,int n, int m){
+        int dp[n];
+        memset(dp,-1,sizeof(dp));
+        dp[0]=0;
         
-        if(dp[n]!=-1)
-        return dp[n];
-        int ans=INT_MAX;
-        for(int i=1;i<=k;i++){
-            int temp;
-            if(n>=i){
-              temp= solve(height,n-i,k,dp)+abs(height[n-i]-height[n]);
+        
+        for(int k=1;k<n;k++){
+            int ans=INT_MAX;
+        for(int i=1;i<=m;i++){
             
-            }
+            if(k>=i){
+             int temp= dp[k-i]+abs(height[k]-height[k-i]);
             ans=min(ans,temp);
+            }
+            
+        }
+        dp[k]=ans;
         }
         
-        return dp[n]=ans;
+        return dp[n-1];
     }
     int minimizeCost(vector<int>& height, int n, int k) {
 
-        int dp[n+1];
-        memset(dp,-1,sizeof(dp));
         
-        return solve(height,n-1,k,dp);
+        
+        return solve(height,n,k);
     }
 };
+
 
 //{ Driver Code Starts.
 
