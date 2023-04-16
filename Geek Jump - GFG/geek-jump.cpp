@@ -8,6 +8,36 @@ using namespace std;
 class Solution {
   public:
   
+  
+  /*
+  
+  //top down approach
+  
+class Solution {
+  public:
+  
+  int solve(vector<int> &dp, vector<int> &height,int n){
+      if(n==0)
+      return 0;
+      
+      if(dp[n]!=-1)
+      return dp[n];
+      
+      int left=solve(dp,height,n-1)+abs(height[n]-height[n-1]);
+      int right=INT_MAX;
+      if(n-2>=0)
+      right=solve(dp,height,n-2)+abs(height[n]-height[n-2]);
+      
+      return dp[n]=min(left,right);
+  }
+    int minimumEnergy(vector<int>& height, int n) {
+        vector<int> dp(n,-1);
+        return solve(dp,height,n-1);
+    }
+};
+
+
+  */
   int solve(vector<int> &height,int n){
       int dp[n];
       dp[0]=0;
