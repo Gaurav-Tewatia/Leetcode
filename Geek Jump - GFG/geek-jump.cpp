@@ -5,32 +5,33 @@ using namespace std;
 
 // } Driver Code Ends
 
-
 class Solution {
   public:
-  int solve(vector<int>&dp,vector<int> &height,int n){
+  
+  int solve(vector<int> &height,int n){
+      int dp[n];
+      dp[0]=0;
       
-        if(n==0)
-        return 0;
-        
-        if(dp[n]!=-1)
-        return dp[n];
-        
-        int left=solve(dp,height,n-1)+abs(height[n]-height[n-1]);
+      for(int i=1;i<n;i++){
+        int left=dp[i-1]+abs(height[i]-height[i-1]);
         int right=INT_MAX;
-        if(n>1)
-        right=solve(dp,height,n-2)+abs(height[n]-height[n-2]);
+        if(i>1)
+        right=dp[i-2]+abs(height[i]-height[i-2]);
         
-        return dp[n]=min(left,right);
-        
+        dp[i]=min(left,right);
+      }
+      
+       
+       return dp[n-1];
+       
   }
     int minimumEnergy(vector<int>& height, int n) {
         
-        vector<int> dp(100000,-1);
-        return solve(dp,height,n-1);
-        
+        return solve(height,n);
     }
 };
+
+
 
 
 //{ Driver Code Starts.
