@@ -1,5 +1,6 @@
 class Solution {
 public:
+    //this is the optimized version  for memoization and bottom up look the previous question of stock2
     int maxProfit(vector<int>& prices, int fee) {
         int n=prices.size();
         
