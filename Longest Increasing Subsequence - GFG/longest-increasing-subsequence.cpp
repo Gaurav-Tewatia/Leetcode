@@ -26,29 +26,51 @@ class Solution
     //     return dp[cur][prev+1]=max(take,nottake);
     // }
     
-    int solvebottomup(int n, int *a){
-        vector<vector<int>> dp(n+1,vector<int>(n+1,0));
     
-    for(int cur=n-1;cur>=0;cur--){
-        for(int prev=cur-1;prev>=-1;prev--){
-            int take=0;
-            if(prev==-1 or a[cur]>a[prev])
-            take=1+dp[cur+1][cur+1];
-            
-            int nottake=dp[cur+1][prev+1];
-            
-            dp[cur][prev+1]=max(take,nottake);
-        }
-    }
     
-    return dp[0][0];
-    }
+    //bottom up approach
+    
+    // int solvebottomup(int n, int *a){
+    //     vector<vector<int>> dp(n+1,vector<int>(n+1,0));
+    
+    // for(int cur=n-1;cur>=0;cur--){
+    //     for(int prev=cur-1;prev>=-1;prev--){
+    //         int take=0;
+    //         if(prev==-1 or a[cur]>a[prev])
+    //         take=1+dp[cur+1][cur+1];
+            
+    //         int nottake=dp[cur+1][prev+1];
+            
+    //         dp[cur][prev+1]=max(take,nottake);
+    //     }
+    // }
+    
+    // return dp[0][0];
+    // }
     //Function to find length of longest increasing subsequence.
     int longestSubsequence(int n, int a[])
  {   //vector<vector<int>> dp(n,vector<int>(n+1,-1));
     //   return solvemem(a,n,0,-1,dp);
     
-    return solvebottomup(n,a);
+    //return solvebottomup(n,a);
+    
+    vector<int> currow(n+1,0),next(n+1,0);
+    
+    for(int cur=n-1;cur>=0;cur--){
+        for(int prev=cur-1;prev>=-1;prev--){
+            int take=0;
+            if(prev==-1 or a[cur]>a[prev])
+            take=1+next[cur+1];
+            
+            int nottake=next[prev+1];
+            
+            currow[prev+1]=max(take,nottake);
+        }
+        next=currow;
+    }
+    
+    return next[0];
+    
     
     
     }
