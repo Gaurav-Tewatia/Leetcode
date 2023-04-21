@@ -28,11 +28,36 @@ public:
     int maxProfit(vector<int>& prices) {
         int n=prices.size();
         
-       // vector<vector<vector<int> > > dp(n+1,vector<vector<int> >(2,vector<int>(3,0)));
+       
         
        // return solve(prices,0,0,2,dp);
         
+     /*   
+        //this is bottom up approach
+         vector<vector<vector<int> > > dp(n+1,vector<vector<int> >(2,vector<int>(3,0)));
         
+        for(int i=n-1;i>=0;i--){
+            for(int j=0;j<=1;j++){
+                for(int limit=1;limit<=2;limit++){
+                    int profit=0;
+
+                    if(!j)
+                        profit=max(-prices[i]+dp[i+1][1][limit],dp[i+1][0][limit]);
+                    else
+                        profit=max(prices[i]+dp[i+1][0][limit-1],dp[i+1][1][limit]);
+
+                    dp[i][j][limit]=profit;
+                    
+                }
+            }
+            
+        }
+        
+        return dp[0][0][2];
+        
+        */
+        
+        //this is space optimized
         vector<vector<int>> ahead(2,vector<int>(3,0)),cur(2,vector<int>(3,0));
         
         for(int i=n-1;i>=0;i--){
