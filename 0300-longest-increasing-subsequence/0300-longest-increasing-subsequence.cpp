@@ -48,6 +48,10 @@ public:
         
 //         return solvebottomup(nums,dp,n);
         
+        
+        
+        //this solution is space optimized although very hard to understand
+        
         vector<int> cur(n+1,0),prev(n+1,0);
         
         for(int currow=n-1;currow>=0;currow--){
