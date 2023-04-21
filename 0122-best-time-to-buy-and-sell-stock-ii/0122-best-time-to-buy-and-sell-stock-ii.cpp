@@ -51,7 +51,7 @@ public:
         //this is space optimized version
         
         vector<int> ahead(2,0),cur(2,0);
-        ahead[0]=ahead[1]=0;
+        
          for(int i=n-1;i>=0;i--){
             for(int j=0;j<=1;j++){
                 
