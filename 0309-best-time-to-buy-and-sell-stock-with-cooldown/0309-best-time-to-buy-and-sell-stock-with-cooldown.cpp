@@ -1,5 +1,8 @@
 class Solution {
 public:
+    //for top down appraoch look for the previous stocks 2 problem
+    
+    //this is the bottom up version 
     int maxProfit(vector<int>& prices) {
         int n=prices.size();
 //          vector<vector<int>> dp(n+2,vector<int>(3,0));
