@@ -54,27 +54,43 @@ class Solution
     
     //return solvebottomup(n,a);
     
-    vector<int> currow(n+1,0),next(n+1,0);
     
-    for(int cur=n-1;cur>=0;cur--){
-        for(int prev=cur-1;prev>=-1;prev--){
-            int take=0;
-            if(prev==-1 or a[cur]>a[prev])
-            take=1+next[cur+1];
+    //space optimized version
+    // vector<int> currow(n+1,0),next(n+1,0);
+    
+    // for(int cur=n-1;cur>=0;cur--){
+    //     for(int prev=cur-1;prev>=-1;prev--){
+    //         int take=0;
+    //         if(prev==-1 or a[cur]>a[prev])
+    //         take=1+next[cur+1];
             
-            int nottake=next[prev+1];
+    //         int nottake=next[prev+1];
             
-            currow[prev+1]=max(take,nottake);
+    //         currow[prev+1]=max(take,nottake);
+    //     }
+    //     next=currow;
+    // }
+    // return next[0];
+    
+    vector<int> dp(n,1);
+    int maxi=0;
+    
+    for(int i=0;i<n;i++){
+        for(int prev=0;prev<i;prev++){
+            if(a[prev]<a[i])
+            dp[i]=max(1+dp[prev],dp[i]);
         }
-        next=currow;
+        maxi=max(dp[i],maxi);
     }
     
-    return next[0];
+    return maxi;
+    
     
     
     
     }
 };
+
 
 //{ Driver Code Starts.
 int main()
