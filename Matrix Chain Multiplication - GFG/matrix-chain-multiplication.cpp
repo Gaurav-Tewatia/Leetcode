@@ -31,7 +31,7 @@ public:
     
     int matrixMultiplication(int N, int arr[])
     {
-        vector<vector<int>> dp(100,vector<int>(N,-1));        
+               
         return solve(1,N-1,arr,dp);
     }
 };
