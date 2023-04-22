@@ -24,6 +24,7 @@ class Solution {
             for(int j=0;j<=find;j++){
                 if(i==0)
                 dp[i][j]=0;
+                
             }
         }
         dp[0][0]=1;
