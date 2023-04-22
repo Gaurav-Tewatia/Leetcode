@@ -34,7 +34,7 @@ public:
                
        // return solve(1,N-1,arr);
         
-        
+        //bottom up approach
         int dp[N][N];
         for(int i=1;i<N;i++)
         dp[i][i]=0;
