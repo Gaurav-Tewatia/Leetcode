@@ -18,7 +18,6 @@ public:
 //     }
     
     
-    
 //     //this is the code for bottom up approach
 //     int solvebottomup(vector<int> &nums, vector<vector<int>> &dp,int n){
         
@@ -52,21 +51,37 @@ public:
         
         //this solution is space optimized although very hard to understand
         
-        vector<int> cur(n+1,0),prev(n+1,0);
+//         vector<int> cur(n+1,0),prev(n+1,0);
         
-        for(int currow=n-1;currow>=0;currow--){
-            for(int prevrow=currow-1;prevrow>=-1;prevrow--){
-                int take=0;;
-                if(prevrow==-1 or nums[currow]>nums[prevrow])
-                    take=1+prev[currow+1];
+//         for(int currow=n-1;currow>=0;currow--){
+//             for(int prevrow=currow-1;prevrow>=-1;prevrow--){
+//                 int take=0;;
+//                 if(prevrow==-1 or nums[currow]>nums[prevrow])
+//                     take=1+prev[currow+1];
                 
-                int nottake=prev[prevrow+1];
+//                 int nottake=prev[prevrow+1];
                 
-                cur[prevrow+1]=max(take, nottake);
+//                 cur[prevrow+1]=max(take, nottake);
+//             }
+//             prev=cur;
+//         }
+        
+       // return prev[0];
+        
+        vector<int> ans;
+        ans.push_back(nums[0]);
+        int len=1;
+        for(int i=1;i<n;i++){
+            if(nums[i]>ans.back()){
+                ans.push_back(nums[i]);
+                len++;
             }
-            prev=cur;
+            else{
+                int id=lower_bound(begin(ans),end(ans),nums[i])-ans.begin();
+                ans[id]=nums[i];
+            }
+                
         }
-        
-        return prev[0];
+        return len;
     }
 };
