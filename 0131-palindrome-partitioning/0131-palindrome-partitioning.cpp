@@ -1,44 +1,47 @@
 class Solution {
 public:
-
-    bool possible(string path){
-        int n=path.size()-1;
-        int s=0;
-        while(s<n){
-            if(path[s]!=path[n])
-            return false;
-            s++;
-            n--;
+    vector<vector<string>> ans;
+    bool palindrome(string &s)
+    {
+        int lo=0;
+        int hi=s.size()-1;
+        while(lo<=hi)
+        {
+            if(s[lo]==s[hi])
+            {
+                lo++;
+                hi--;
+            }
+            else
+            {
+                return false;
+            }
         }
         return true;
     }
-
-    void solve(vector<vector<string> >& ans, vector<string> temp, string path, string s,int index){
-        if(index==s.size()){
-            ans.push_back(temp);
+    void solve(int i,string &s,vector<string> &v)
+    {
+        int n=s.size();
+        if(i==n)
+        {
+            ans.push_back(v);
             return;
         }
-
-        path="";
-           for(int i=index;i<s.size();i++){
-               path.push_back(s[i]);
-
-               if(possible(path)){
-                   temp.push_back(path);
-                   solve(ans,temp,path,s,i+1);
-                   temp.pop_back();
-               }
-           }
-        
+        string sub="";
+        for(int idx=i;idx<n;idx++)
+        {
+            sub=sub+s[idx];
+            if(palindrome(sub))
+            {
+                v.push_back(sub);
+                solve(idx+1,s,v);
+                v.pop_back();
+            }
+        }
     }
-
     vector<vector<string>> partition(string s) {
-        vector<vector<string>> ans;
-        vector<string> temp;
-        string path;
-        solve(ans,temp,path,s,0);
-
+        vector<string> v;
+        solve(0,s,v);
         return ans;
-
     }
 };
