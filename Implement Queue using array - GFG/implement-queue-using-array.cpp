@@ -69,7 +69,7 @@ public :
 //Function to push an element x in a queue.
 void MyQueue :: push(int x)
 {       int n=sizeof(arr)/sizeof(int);
-        if(front==0 and rear==n-1)
+        if(rear==n)
         cout<<"array is full";
         else
         arr[rear++]=x;
