@@ -86,6 +86,8 @@ int MyQueue :: pop()
             ans=arr[front];
             arr[front]=-1;
             front++;
+            if(front==rear)
+            front=rear=0;
         }
         return ans;
 }
