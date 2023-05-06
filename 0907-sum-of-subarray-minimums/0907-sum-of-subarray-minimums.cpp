@@ -57,7 +57,7 @@ public:
 
         int count=0;
         for(int i=0;i<arr.size();i++){
-            count+=((((nsr[i]*nsl[i]))*arr[i])%modulo)%modulo;
+              count+=(arr[i]*(nsr[i]*nsl[i])%modulo)%modulo;
  count%=modulo;
         }
         
