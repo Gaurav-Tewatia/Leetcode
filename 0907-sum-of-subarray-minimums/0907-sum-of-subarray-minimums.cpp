@@ -47,6 +47,11 @@ public:
         
         reverse(begin(nsr),end(nsr));
         
+        for(auto c:nsl)
+            cout<<c<<" ";
+        cout<<endl;
+        for(auto c:nsr)
+            cout<<c<<" ";
 
         
 
