@@ -47,13 +47,13 @@ public:
         
         reverse(begin(nsr),end(nsr));
         
+
         
-        int count=0;
+        
+     int count=0;
         for(int i=0;i<arr.size();i++){
             count+=((((nsr[i]*nsl[i]))*arr[i])%modulo)%modulo;
- count%=modulo;
-}
-        
+ count%=modulo;}
         
         return count;
     }
