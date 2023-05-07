@@ -5,7 +5,7 @@ public:
         vector<long long> nsl; // for distance between previous smaller element and current
         int n = arr.size();
         vector<long long> nsr;  //for distance between next smaller eleement to right and current
-        stack<long long> st;
+        stack<int> st;
         for(int i=0;i<arr.size();i++){
             if(st.empty())
                 nsl.push_back(i+1); //pushing the ditstance between nsl and current element
@@ -24,7 +24,7 @@ public:
             st.push(i);
         }
         
-        stack<long long> temp;
+        stack<int> temp;
         st.swap(temp);
         
            for(int i=arr.size()-1;i>=0;i--){
