@@ -2,7 +2,7 @@ class Solution {
 public:
     int modulo=1e9+7;
     int sumSubarrayMins(vector<int>& arr) {
-        vector<long long> nsl; // for distance between previous smaller element and current
+        vector<int> nsl; // for distance between previous smaller element and current
         int n = arr.size();
         vector<long long> nsr;  //for distance between next smaller eleement to right and current
         stack<int> st;
