@@ -16,12 +16,8 @@ class Solution{
     while(j<n){
         mp[s[j]]++;
         
-        if(mp.size()<k)
-        j++;
-        else if(mp.size()==k){
+        if(mp.size()==k)
             maxi=max(maxi,j-i+1);
-            j++;
-        }
         else {
             while(mp.size()>k){
             mp[s[i]]--;
@@ -29,9 +25,8 @@ class Solution{
             mp.erase(s[i]);
             i++;
             }
-            
-            j++;
         }
+        j++;
     }
     return maxi;
     }
