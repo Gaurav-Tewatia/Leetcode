@@ -1,12 +1,51 @@
 class Solution {
 public:
     bool canMakeArithmeticProgression(vector<int>& arr) {
-        sort(arr.begin(),arr.end());
-        int diff=arr[1]-arr[0];
-        for(int i=2;i<arr.size();i++){
-            if(arr[i]-arr[i-1]!=diff)
+        if (arr.size() <= 2) return true;
+        int max=*max_element(arr.begin(),arr.end());
+        int min=*min_element(arr.begin(),arr.end());
+        int n=arr.size();
+        if((max-min)%(n-1)!=0) return false;
+        int diff=(max-min)/(n-1);
+        
+        int i=0;
+        while(i<n){
+            if(arr[i]==min+i*diff)
+                i++;
+            else if((arr[i]-min)%diff!=0){
                 return false;
+            }
+            else{
+                int pos=(arr[i]-min)/diff;
+                if(pos<i or arr[pos]==arr[i])
+                    return false;
+                swap(arr[i],arr[pos]);
+            }
+                
         }
         return true;
+        
+        
+        
+//         if (arr.size() <= 2) return true;
+//         int min = INT_MAX, max = INT_MIN;
+//         for (int num : arr) {
+//             min = std::min(min, num);
+//             max = std::max(max, num);
+//         }
+//         if ((max - min) % (arr.size() - 1) != 0) return false;
+//         int d = (max - min) / (arr.size() - 1);
+
+//         int i = 0;
+//         while (i < arr.size()) {
+//             if (arr[i] == min + i * d) i++;
+//             else if ((arr[i] - min) % d != 0) return false;
+//             else {
+//                 int pos = (arr[i] - min) / d;
+//                 if (pos < i || arr[pos] == arr[i]) return false;
+//                 std::swap(arr[i], arr[pos]);
+//             }
+//         }
+//         return true;
     }
 };
