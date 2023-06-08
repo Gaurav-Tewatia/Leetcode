@@ -14,7 +14,7 @@ public:
         }
         if(i<grid.size()){
             while(i<grid.size()){
-                count+=grid[0].size();
+                count+=grid[i].size();
                 i++;
             }
         }
