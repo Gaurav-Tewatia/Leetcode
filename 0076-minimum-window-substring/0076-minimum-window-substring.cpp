@@ -24,9 +24,8 @@ public:
                     count--;
             }
             
-            if(count>0)
-                j++;
-            else if(count==0){
+            
+            if(count==0){
                 
                 while(count==0){
                     if(mini>j-i+1){
@@ -41,8 +40,9 @@ public:
                     }
                     i++;
                 }
-                j++;
+                
             }
+            j++;
             
         }
          if(mini!=INT_MAX){
