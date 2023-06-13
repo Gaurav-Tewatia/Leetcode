@@ -29,12 +29,38 @@ class Solution {
         }
         int vis[V]={0};
         int count=0;
+        // for(int i=0;i<V;i++){
+        //     if(!vis[i]){
+        //         dfs(i,adjls,vis);
+        //         count++;
+        //     }
+        // }
+        
+        queue<int>q;
+        
         for(int i=0;i<V;i++){
-            if(!vis[i]){
-                dfs(i,adjls,vis);
-                count++;
+            if(vis[i]==0)
+            {
+                vis[i]=1;
+                q.push(i);
+                
+                while(!q.empty()){
+                int a=q.front();
+                q.pop();
+                for(auto c:adjls[a])
+                {
+                    if(!vis[c]){
+                        vis[c]=1;
+                        q.push(c);
+                    }
+                }
             }
+            count++;
+            }
+            
+            
         }
+        
         return count;
     }
 };
