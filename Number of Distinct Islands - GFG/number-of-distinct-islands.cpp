@@ -18,7 +18,7 @@ class Solution {
         grid[x][y] = 0;
         for (int dx = -1; dx <= 1; dx++) {
             for (int dy = -1; dy <= 1; dy++) {
-                if (dx != dy && dx*dy == 0) {
+                if (dx*dy == 0) {
                     dfs(x + dx, y + dy, grid, s, vec);
                 }
             }
