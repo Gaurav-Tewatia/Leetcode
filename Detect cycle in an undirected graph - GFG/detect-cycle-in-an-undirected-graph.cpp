@@ -3,9 +3,10 @@
 using namespace std;
 
 // } Driver Code Ends
+
 class Solution {
     private:
-        bool checkbfs(int start,int vis[], vector<int>& adj[]){
+        bool checkbfs(int start,int vis[], vector<int> adj[]){
             vis[start]=1;
             queue<pair<int,int>> q;
             q.push({start,-1});
@@ -28,19 +29,38 @@ class Solution {
             }
             return false;
         }
+        
+        bool checkdfs(int start,int parent,int vis[], vector<int> adj[]){
+            vis[start]=1;
+            
+            
+            for(auto c:adj[start]){
+                if(!vis[c]){
+                    if(checkdfs(c,start,vis,adj))
+                    return true;
+                }
+                else if(parent!=c)
+                return true;
+            }
+            return false;
+        }
   public:
     // Function to detect cycle in an undirected graph.
     bool isCycle(int V, vector<int> adj[]) {
         int vis[V]={0};
         for(int i=0;i<V;i++){
             if(!vis[i]){
-                if(checkbfs(i,vis,adj))
+                if(/*checkbfs(i,vis,adj)*/ checkdfs(i,-1,vis,adj))
                 return true;
             }
         }
         return false;
+        
+        
+        
     }
 };
+
 
 //{ Driver Code Starts.
 int main() {
