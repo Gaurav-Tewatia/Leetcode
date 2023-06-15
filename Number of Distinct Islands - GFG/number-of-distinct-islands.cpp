@@ -6,41 +6,49 @@ using namespace std;
 
 // } Driver Code Ends
 // User function Template for C++
+
 class Solution {
-  public:
-    void dfs(int x, int y, vector<vector<int>> &grid, set<vector<bool>> &s, vector<bool> &vec) {
-        if (x < 0 || x >= grid.size() || y < 0 || y >= grid[0].size() || grid[x][y] == 0) {
-            vec.push_back(0);
-            return;
+  private:
+    void dfs(int i,int j,vector<pair<int,int>>&v, vector<vector<int>>&vis,vector<vector<int>>&grid,int row,int col){
+        vis[i][j]=1;
+        
+        v.push_back({i-row,j-col});
+        int n=grid.size();
+        int m=grid[0].size();
+        int drow[]={-1,0,1,0};
+        int dcol[]={0,1,0,-1};
+        
+        for(int k=0;k<4;k++){
+            int nrow=i+drow[k];
+            int ncol=j+dcol[k];
+            if(nrow>=0 and nrow<n and ncol>=0 and ncol<m and grid[nrow][ncol]==1 and vis[nrow][ncol]==0)
+            dfs(nrow,ncol,v,vis,grid,row,col);
         }
         
-        vec.push_back(1);
-        grid[x][y] = 0;
-        for (int dx = -1; dx <= 1; dx++) {
-            for (int dy = -1; dy <= 1; dy++) {
-                if (dx*dy == 0) {
-                    dfs(x + dx, y + dy, grid, s, vec);
-                }
-            }
-        }
     }
+  public:
     int countDistinctIslands(vector<vector<int>>& grid) {
-        // code here
-        set<vector<bool>> s;
-        vector<bool> vec;
-        for (int i = 0; i < grid.size(); i++) {
-            for (int j = 0; j < grid[0].size(); j++) {
-                if (grid[i][j] == 1) {
-                    dfs(i, j, grid, s, vec);
-                    s.insert(vec);
-                    vec = {};
+        int n=grid.size(),m=grid[0].size();
+        
+        vector<vector<int>> vis(n,vector<int>(m,0));
+        
+        set<vector<pair<int,int>>>s;
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]==1 and vis[i][j]==0){
+                    vector<pair<int,int>>v;
+                    dfs(i,j,v,vis,grid,i,j);
+                    s.insert(v);
+                    
                 }
+            
             }
         }
+        
         return s.size();
     }
 };
-
 
 //{ Driver Code Starts.
 
