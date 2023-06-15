@@ -5,7 +5,7 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
     private:
-        bool checkbfs(int start,int vis[], vector<int> adj[]){
+        bool checkbfs(int start,int vis[], vector<int>& adj[]){
             vis[start]=1;
             queue<pair<int,int>> q;
             q.push({start,-1});
