@@ -26,19 +26,49 @@ class Solution
 	{
 	    int vis[V]={0};
 	    stack<int> s;
-	    for(int i=0;i<V;i++){
-	        if(vis[i]==0)
-	        dfs(i,vis,s,adj);
-	    }
+	    queue<int> q;
+	    int indegree[V]={0};
+	   // for(int i=0;i<V;i++){
+	   //     if(vis[i]==0)
+	   //     dfs(i,vis,s,adj);
+	   // }
 	    
-	    vector<int> ans;
-	    while(!s.empty()){
-	        ans.push_back(s.top());
-	        s.pop();
-	    }
-	    return ans;
+	   // vector<int> ans;
+	   // while(!s.empty()){
+	   //     ans.push_back(s.top());
+	   //     s.pop();
+	   // }
+	   // return ans;
+	   
+	   for(int i=0;i<V;i++){
+	        for(auto c:adj[i]){
+	            indegree[c]++;
+	        }
+	   }
+	   
+	   for(int i=0;i<V;i++){
+	       if(indegree[i]==0)
+	       q.push(i);
+	   }
+	   vector<int> ans;
+	   while(!q.empty()){
+	       int a=q.front();
+	       q.pop();
+	       ans.push_back(a);
+	       for(auto it:adj[a]){
+	           indegree[it]--;
+	           if(indegree[it]==0)
+	           q.push(it);
+	       }
+	   }
+	   
+	   return ans;
 	}
 };
+
+
+
+
 
 
 //{ Driver Code Starts.
