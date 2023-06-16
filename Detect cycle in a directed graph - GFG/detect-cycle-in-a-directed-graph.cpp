@@ -25,18 +25,56 @@ class Solution {
     // Function to detect cycle in a directed graph.
     bool isCyclic(int V, vector<int> adj[]) {
        
-       int vis[V]={0};
-       int path[V]={0};
+    //   int vis[V]={0};
+    //   int path[V]={0};
        
-       for(int i=0;i<V;i++){
-           if(vis[i]==0)
-           {
-               if(dfs(i,vis,path,adj)==true) return true;
-           }
-       }
-       return false;
+    //   for(int i=0;i<V;i++){
+    //       if(vis[i]==0)
+    //       {
+    //           if(dfs(i,vis,path,adj)==true) return true;
+    //       }
+    //   }
+    //   return false;
+    
+    //using topological sort
+    
+    int indegree[V]={0};
+    for(int i=0;i<V;i++){
+        for(auto c:adj[i])
+        indegree[c]++;
+    }
+    
+    queue<int> q;  //store the order
+    for(int i=0;i<V;i++){
+        if(indegree[i]==0)
+        q.push(i);  //pushed all the nodes which have no parent node
+    }
+    vector<int> topo;
+        while(!q.empty()){
+            int a=q.front();
+            topo.push_back(a);
+            q.pop();
+            
+            for(auto it:adj[a]){
+                indegree[it]--;
+                if(indegree[it]==0)
+                q.push(it);
+            }
+        }
+        
+        if(topo.size()<V){
+            return true;
+        }
+        else
+        return false;
     }
 };
+
+
+
+
+
+
 
 //{ Driver Code Starts.
 
