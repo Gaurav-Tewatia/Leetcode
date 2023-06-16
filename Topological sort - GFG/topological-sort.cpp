@@ -40,6 +40,8 @@ class Solution
 	   // }
 	   // return ans;
 	   
+	   
+	   //using BFS also called kahn's algorithm
 	   for(int i=0;i<V;i++){
 	        for(auto c:adj[i]){
 	            indegree[c]++;
