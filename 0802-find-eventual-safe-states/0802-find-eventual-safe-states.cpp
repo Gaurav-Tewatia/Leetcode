@@ -1,22 +1,22 @@
 class Solution {
 private:
-    bool dfs(int node, int *vis,int *path,vector<int>adj[],int *check){
+    bool dfs(int node, int *vis,int *path,vector<int>adj[],vector<int> &ans){
         vis[node]=1;
         path[node]=1;
-        check[node]=0;
+        // check[node]=0;
         
         for(auto c:adj[node]){
             if(!vis[c]){
-                if(dfs(c,vis,path,adj,check)==true)
+                if(dfs(c,vis,path,adj,ans)==true)
                 {
-                    check[node]=0;
+                    // check[node]=0;
                     return true;
                 }
             }
             else if(path[c])
                 return true;
         }
-        check[node]=1;
+        ans.push_back(node);
         path[node]=0;
         return false;
     }
@@ -38,18 +38,20 @@ public:
             path[i]=0;
             check[i]=0;
         }
-        
+         vector<int> ans;
         for(int i=0;i<n;i++){
             if(!vis[i]){
-                dfs(i,vis,path,adj,check);
+                dfs(i,vis,path,adj,ans);
             }
         }
         
-        vector<int> ans;
-        for(int i=0;i<n;i++){
-        if(check[i]==1)
-            ans.push_back(i);
-        }
+       
+        // for(int i=0;i<n;i++){
+        // if(check[i]==1)
+        //     ans.push_back(i);
+        // }
+        
+        sort(ans.begin(),ans.end());
             return ans;
     }
 };
