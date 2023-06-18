@@ -25,7 +25,7 @@ public:
                    word[i]=ch;
                    
                    if(s.find(word)!=s.end()){
-                       cout<<"inside if";
+                       
                        q.push({word,steps+1});
                        s.erase(word);
                        
