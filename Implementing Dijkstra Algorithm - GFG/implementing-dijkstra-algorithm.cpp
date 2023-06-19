@@ -10,57 +10,59 @@ class Solution
     //from the source vertex S.
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
-        // set<pair<int,int>> s;
-        // s.insert({0,S});
+        set<pair<int,int>> s;
+        s.insert({0,S});
         
-        // vector<int>dis(V,1e9);
-        // dis[S]=0;
-        
-        // while(!s.empty()){
-        //     auto it=*(s.begin());
-        //     int dist= it.first;
-        //     int node=it.second;
-        //     s.erase(it);
-            
-        //     for(auto c:adj[node]){
-        //         int adjnode=c[0];
-        //         int wt=c[1];
-                
-        //         if(dist+wt<dis[adjnode]){
-        //             if(dis[adjnode]!=1e9)
-        //                 s.erase({dis[adjnode],adjnode});
-                        
-        //                 dis[adjnode]=dist+wt;
-        //                 s.insert({dis[adjnode],adjnode});
-                    
-        //         }
-        //     }
-        // }
-        // return dis;
-        
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
-        pq.push({0,S});
         vector<int>dis(V,1e9);
         dis[S]=0;
         
-        while(!pq.empty()){
-            int dist=pq.top().first;
-            int node=pq.top().second;
-            pq.pop();
+        while(!s.empty()){
+            auto it=*(s.begin());
+            int dist= it.first;
+            int node=it.second;
+            s.erase(it);
             
             for(auto c:adj[node]){
                 int adjnode=c[0];
                 int wt=c[1];
                 
                 if(dist+wt<dis[adjnode]){
+                    if(dis[adjnode]!=1e9)
+                        s.erase({dis[adjnode],adjnode});
+                        
+                        dis[adjnode]=dist+wt;
+                        s.insert({dis[adjnode],adjnode});
                     
-                    dis[adjnode]=dist+wt;
-                    pq.push({dis[adjnode],adjnode});
                 }
             }
         }
-        
         return dis;
+        
+        
+        //this is using priority queue;
+        // priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+        // pq.push({0,S});
+        // vector<int>dis(V,1e9);
+        // dis[S]=0;
+        
+        // while(!pq.empty()){
+        //     int dist=pq.top().first;
+        //     int node=pq.top().second;
+        //     pq.pop();
+            
+        //     for(auto c:adj[node]){
+        //         int adjnode=c[0];
+        //         int wt=c[1];
+                
+        //         if(dist+wt<dis[adjnode]){
+                    
+        //             dis[adjnode]=dist+wt;
+        //             pq.push({dis[adjnode],adjnode});
+        //         }
+        //     }
+        // }
+        
+        // return dis;
     }
 };
 
