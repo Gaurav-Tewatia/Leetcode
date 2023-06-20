@@ -3,6 +3,7 @@
 using namespace std;
 
 // } Driver Code Ends
+
 class Solution
 {
 	public:
@@ -17,10 +18,10 @@ class Solution
         dis[S]=0;
         
         while(!s.empty()){
-            auto it=*(s.begin());
-            int dist= it.first;
-            int node=it.second;
-            s.erase(it);
+            // auto it=*(s.begin());
+            int dist= (*(s.begin())).first;
+            int node=(*(s.begin())).second;
+            s.erase(*(s.begin()));
             
             for(auto c:adj[node]){
                 int adjnode=c[0];
@@ -38,16 +39,15 @@ class Solution
         }
         return dis;
         
-        
-        //this is using priority queue;
         // priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
         // pq.push({0,S});
         // vector<int>dis(V,1e9);
         // dis[S]=0;
         
         // while(!pq.empty()){
-        //     int dist=pq.top().first;
-        //     int node=pq.top().second;
+        //     auto it=pq.top();
+        //     int dist=it.first;
+        //     int node=it.second;
         //     pq.pop();
             
         //     for(auto c:adj[node]){
