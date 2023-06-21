@@ -3,66 +3,33 @@
 using namespace std;
 
 // } Driver Code Ends
-
 class Solution
 {
 	public:
 	//Function to find the shortest distance of all the vertices
     //from the source vertex S.
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
-    {
-        set<pair<int,int>> s;
-        s.insert({0,S});
-        
-        vector<int>dis(V,1e9);
+    { 
+        vector<int> dis(V,1e9);
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+        pq.push({0,S});
         dis[S]=0;
-        
-        while(!s.empty()){
-            // auto it=*(s.begin());
-            int dist= (*(s.begin())).first;
-            int node=(*(s.begin())).second;
-            s.erase(*(s.begin()));
+        while(!pq.empty()){
+            int dist=pq.top().first;
+            int node=pq.top().second;
+            pq.pop();
             
             for(auto c:adj[node]){
                 int adjnode=c[0];
                 int wt=c[1];
-                
                 if(dist+wt<dis[adjnode]){
-                    if(dis[adjnode]!=1e9)
-                        s.erase({dis[adjnode],adjnode});
-                        
-                        dis[adjnode]=dist+wt;
-                        s.insert({dis[adjnode],adjnode});
-                    
+                    dis[adjnode]=dist+wt;
+                    pq.push({dis[adjnode],adjnode});
                 }
             }
+            
         }
         return dis;
-        
-        // priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
-        // pq.push({0,S});
-        // vector<int>dis(V,1e9);
-        // dis[S]=0;
-        
-        // while(!pq.empty()){
-        //     auto it=pq.top();
-        //     int dist=it.first;
-        //     int node=it.second;
-        //     pq.pop();
-            
-        //     for(auto c:adj[node]){
-        //         int adjnode=c[0];
-        //         int wt=c[1];
-                
-        //         if(dist+wt<dis[adjnode]){
-                    
-        //             dis[adjnode]=dist+wt;
-        //             pq.push({dis[adjnode],adjnode});
-        //         }
-        //     }
-        // }
-        
-        // return dis;
     }
 };
 
