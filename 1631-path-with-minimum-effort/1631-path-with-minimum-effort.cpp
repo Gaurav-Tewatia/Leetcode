@@ -23,6 +23,8 @@ public:
             int col=pq.top().second.second;
             
             pq.pop();
+            if(row==n-1 and col==m-1)
+                return dist;
             
             for(int i=0;i<4;i++){
                 int nrow=row+dr[i];
@@ -38,6 +40,6 @@ public:
                 }
             }
         }
-        return dis[n-1][m-1];
+        return 0;
     }
 };
