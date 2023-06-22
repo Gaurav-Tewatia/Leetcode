@@ -29,10 +29,10 @@ class Solution {
                 
                 if(num==end)
                 return steps+1;
-                if(dis[num]==1e9){
-                    pq.push({num,steps+1});
-                    dis[num]=steps+1;
-                }
+               if(dis[num]>steps+1){
+                   dis[num]=steps+1;
+                   pq.push({num,steps+1});
+               }
                 
             }
         }
