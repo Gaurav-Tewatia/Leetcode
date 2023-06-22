@@ -1,4 +1,5 @@
 # define ll long long
+# define pll pair<long long, long long>
 class Solution {
 public:
     int countPaths(int n, vector<vector<int>>& roads) {
@@ -11,7 +12,7 @@ public:
             adj[c[1]].push_back({c[0],c[2]});
         }
         
-        priority_queue<pair<ll,long long>,vector<pair<long long, long long>>,greater<pair<long long, long long>>>pq;
+        priority_queue<pll,vector<pair<long long, long long>>,greater<pair<long long, long long>>>pq;
         pq.push({0,0}); //dis,node
         vector<long long>dis(n,1e18),ways(n,0);
         int count=0;
