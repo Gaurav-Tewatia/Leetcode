@@ -24,7 +24,7 @@ public:
             
             for(auto c:adj[node]){
                 int adjnode=c.first;
-                long long wt=c.second;
+                int wt=c.second;
                 if(dist+wt<dis[adjnode]){
                     dis[adjnode]=dist+wt;
                     pq.push({dis[adjnode],adjnode});
