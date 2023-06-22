@@ -26,13 +26,14 @@ class Solution {
             
             for(auto c:arr){
                 int num=(node*c)%mod;
-                if(steps+1<dis[num]){
-                    dis[num]=steps+1;
-                    
-                    if(num==end)
-                        return steps+1;
+                
+                if(num==end)
+                return steps+1;
+                if(dis[num]==1e9){
                     pq.push({num,steps+1});
+                    dis[num]=steps+1;
                 }
+                
             }
         }
         
