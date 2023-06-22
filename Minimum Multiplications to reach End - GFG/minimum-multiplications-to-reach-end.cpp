@@ -12,14 +12,14 @@ class Solution {
   public:
   int mod=100000;
     int minimumMultiplications(vector<int>& arr, int start, int end) {
-        // priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
-        queue<pair<int,int>>pq;
-        pq.push({start,0});
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+        // queue<pair<int,int>>pq;
+        pq.push({0,start});
         vector<int>dis(100000,1e9);
         dis[start]=0;
         while(!pq.empty()){
-            int node=pq.front().first;
-            int steps=pq.front().second;
+            int steps=pq.top().first;
+            int node=pq.top().second;
             pq.pop();
             
             
@@ -31,7 +31,7 @@ class Solution {
                 return steps+1;
                if(dis[num]>steps+1){
                    dis[num]=steps+1;
-                   pq.push({num,steps+1});
+                   pq.push({steps+1,num});
                }
                 
             }
