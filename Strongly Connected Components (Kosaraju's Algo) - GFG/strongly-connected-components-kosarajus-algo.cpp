@@ -6,7 +6,7 @@ using namespace std;
 class Solution
 {
     private:
-        void dfs(int node,stack<int> &st, vector<int> &vis,vector<vector<int>> adj){
+        void dfs(int node,stack<int> &st, vector<int> &vis,vector<vector<int>>& adj){
             vis[node]=1;
             
             for(auto c:adj[node]){
