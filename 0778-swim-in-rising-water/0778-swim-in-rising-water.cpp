@@ -1,33 +1,33 @@
 class Solution {
 public:
     int swimInWater(vector<vector<int>>& grid) {
-        int n = grid.size();
-        if (n == 1)
-        return 0;
-        vector<pair<int, int>> xy{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-        vector<vector<int>> dis(n, vector<int> (n, 5e3));
-        pq.push({grid[0][0], 0});
-        while (!pq.empty())
-        {
-            int d = pq.top().first;
-            int a = pq.top().second / n;
-            int b = pq.top().second % n;
+        int n=grid.size();
+        vector<vector<int>> vis(n,vector<int> (n,0));
+        priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>>pq;
+        pq.push({grid[0][0],{0,0}});
+        vis[0][0]=1;
+        vector<pair<int,int>> drc{{-1,0},{0,1},{1,0},{0,-1}};
+        while(!pq.empty()){
+            int time=pq.top().first;
+            int row=pq.top().second.first;
+            int col=pq.top().second.second;
             pq.pop();
-            for (int i = 0; i < 4; i++)
-            {
-                int x = a + xy[i].first;
-                int y = b + xy[i].second;
-                if ((x >= 0) && (x < n) && (y >= 0) && (y < n))
-                {
-                    int mx = max(d, grid[x][y]);
-                    if (dis[x][y] <= mx)
-                    continue;
-                    dis[x][y] = mx;
-                    pq.push({mx, x*n + y});
+            
+            if(row==n-1 and col==n-1)
+                return time;
+            for(int i=0;i<4;i++){
+                int nrow=row+drc[i].first;
+                int ncol=col+drc[i].second;
+                
+                if(nrow>=0 and nrow<n and ncol>=0 and ncol<n and vis[nrow][ncol]==0){
+                    int dis=max(time,grid[nrow][ncol]);
+                    vis[nrow][ncol]=1;
+                    pq.push({dis,{nrow,ncol}});
                 }
             }
+            
+            
         }
-        return dis[n - 1][n - 1];
+        return 0;
     }
 };
