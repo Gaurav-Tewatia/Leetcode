@@ -10,16 +10,24 @@ class Solution{
     int searchInsertK(vector<int>Arr, int N, int k)
     {
         int low=0, high=N-1;
+        int ans;
+        if(Arr[0]>k)
+        ans=-1;
+        if(Arr[N-1]<k)
+        ans=N;
         while(low<=high){
             int mid=low+(high-low)/2;
             
-            if(Arr[mid]<k)
-            low=mid+1;
-            else
-            high=mid-1;
+           if(Arr[mid]>=k){
+               ans=mid;
+               high=mid-1;
+           }
+           else{
+               low=mid+1;
+           }
         }
         
-        return low;
+        return ans;
     }
 };
 
