@@ -12,8 +12,9 @@ class Solution {
         int mid=low+(high-low)/2;
         if(A[mid]==Key)
         return true;
-        else if(A[low]==A[high])
+        else if(A[low]==A[mid] and A[mid]==A[high]){
         low++,high--;
+        continue;}
         else if(A[low]<=A[mid]){
                 if(Key>=A[low] and Key<A[mid])
                 high=mid-1;
