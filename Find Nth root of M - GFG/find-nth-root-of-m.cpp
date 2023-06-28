@@ -10,7 +10,7 @@ class Solution{
 	    int low=1,high=m;
 	    
 	    while(low<=high){
-	        int mid=low+(high-low)/2;
+	        long long mid=low+(high-low)/2;
 	        if(pow(mid,n)==m)
 	        return mid;
 	        else if(pow(mid,n)<m)
