@@ -9,7 +9,7 @@ class Solution {
     bool check(double mid, vector<int> &stations, int k){
         int n=stations.size();
         for(int i=1;i<n;i++){
-            double diff=stations[i]-stations[i-1];
+            int diff=stations[i]-stations[i-1];
             if(diff>mid){
                 int inserted=(diff)/mid;
                 k-=inserted;
@@ -26,7 +26,7 @@ class Solution {
       double high=stations[n-1]-stations[0];
       double low=0;
       
-      while(high-low>1e-5){
+      while(high-low>=1e-5){
           double mid=(high+low)/2;
           
           if(check(mid,stations,K))
