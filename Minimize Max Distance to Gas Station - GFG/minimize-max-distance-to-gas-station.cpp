@@ -26,7 +26,7 @@ class Solution {
       double high=stations[n-1]-stations[0];
       double low=0;
       
-      while(high-low>1e-7){
+      while(high-low>1e-5){
           double mid=(high+low)/2;
           
           if(check(mid,stations,K))
@@ -35,7 +35,7 @@ class Solution {
           low=mid;
       }
     //   cout<<setprecision(2);
-      return low+0.000001;
+      return low+0.00001;
     }
 };
 
