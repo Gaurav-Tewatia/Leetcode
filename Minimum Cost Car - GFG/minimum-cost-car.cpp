@@ -37,7 +37,7 @@ class Solution
                     
                     if(dist+wt<dis[adjnode]){
                         dis[adjnode]=dist+wt;
-                        // cout<<adjnode<<" "<<dis[adjnode]<<" ";
+                        
                         pq.push({steps+1,{dis[adjnode],adjnode}});
                     }
                 }
