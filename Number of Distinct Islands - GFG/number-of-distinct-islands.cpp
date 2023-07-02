@@ -6,49 +6,45 @@ using namespace std;
 
 // } Driver Code Ends
 // User function Template for C++
-
 class Solution {
-  private:
-    void dfs(int i,int j,vector<pair<int,int>>&v, vector<vector<int>>&vis,vector<vector<int>>&grid,int row,int col){
-        vis[i][j]=1;
-        
-        v.push_back({i-row,j-col});
+    void dfs(int r,int c,int sr,int sc,vector<vector<int>>&grid
+    ,vector<pair<int,int>>&a,vector<vector<int>>&vis){
+        vis[r][c]=1;
+        a.push_back({r-sr,c-sc});
         int n=grid.size();
         int m=grid[0].size();
-        int drow[]={-1,0,1,0};
-        int dcol[]={0,1,0,-1};
-        
-        for(int k=0;k<4;k++){
-            int nrow=i+drow[k];
-            int ncol=j+dcol[k];
-            if(nrow>=0 and nrow<n and ncol>=0 and ncol<m and grid[nrow][ncol]==1 and vis[nrow][ncol]==0)
-            dfs(nrow,ncol,v,vis,grid,row,col);
+        int delr[]={1,0,-1,0};
+        int delc[]={0,1,0,-1};
+        for(int i=0;i<4;i++){
+            int row=r+delr[i];
+            int col=c+delc[i];
+            if(row>=0 and row<n and col>=0 and col<m and 
+            !vis[row][col] and grid[row][col]==1){
+                dfs(row,col,sr,sc,grid,a,vis);
+            }
         }
-        
+        return ;
     }
   public:
     int countDistinctIslands(vector<vector<int>>& grid) {
-        int n=grid.size(),m=grid[0].size();
-        
-        vector<vector<int>> vis(n,vector<int>(m,0));
-        
-        set<vector<pair<int,int>>>s;
-        
+        // code here
+        int n=grid.size();
+        int m=grid[0].size();
+        vector<vector<int>>vis(n,vector<int>(m,0));
+        set<vector<pair<int,int>>>st;
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                if(grid[i][j]==1 and vis[i][j]==0){
-                    vector<pair<int,int>>v;
-                    dfs(i,j,v,vis,grid,i,j);
-                    s.insert(v);
-                    
+                vector<pair<int,int>>a;
+                if(vis[i][j]==0 and grid[i][j]==1){
+                    dfs(i,j,i,j,grid,a,vis);
+                    st.insert(a);
                 }
-            
             }
         }
-        
-        return s.size();
+        return st.size();
     }
 };
+
 
 //{ Driver Code Starts.
 
