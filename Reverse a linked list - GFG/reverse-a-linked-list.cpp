@@ -46,7 +46,7 @@ class Solution
         // head=pre;
         // return head;
         
-        if(!head->next or !head) return head;
+        if(!head or !head->next) return head;
         
         
         Node*shead=reverseList(head->next);
