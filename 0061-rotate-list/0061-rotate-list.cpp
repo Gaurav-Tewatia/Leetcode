@@ -20,8 +20,8 @@ public:
         temp->next=head;
         ListNode*n=head;
         k=k%cnt;
-         cnt= cnt-k-1;
-        while(cnt--){
+         cnt= cnt-k;
+        while(--cnt){
             n=n->next;
             
         }
