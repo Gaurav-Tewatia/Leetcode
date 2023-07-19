@@ -10,11 +10,12 @@ using namespace std;
 class Solution {
     private:
     void helper(int i,int n,vector<int> &candidates,int target,vector<int> &v, vector<vector<int>> &ans){
-        if(i==n) return;
+        
         if(target==0){
             ans.push_back(v);
             return;
         }
+        if(i==n) return;
         
         for(int j=i;j<n;j++){
             if(j!=i and (candidates[j]==candidates[j-1])) continue;
