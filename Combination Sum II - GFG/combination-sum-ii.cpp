@@ -15,11 +15,11 @@ class Solution {
             ans.push_back(v);
             return;
         }
-        if(i==n) return;
+        
         
         for(int j=i;j<n;j++){
             if(j!=i and (candidates[j]==candidates[j-1])) continue;
-            if(candidates[j]>target)break;
+           if(candidates[j]>target)break;
             v.push_back(candidates[j]);
             helper(j+1,n,candidates,target-candidates[j],v,ans);
             v.pop_back();
