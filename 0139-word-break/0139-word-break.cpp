@@ -1,15 +1,12 @@
 class Solution {
 public:
     
-    bool found(string &path,vector<string> &wordDict,map<string,int> &mp){
+    bool found(string &path,vector<string> &wordDict,unordered_set<string> &mp){
         
-        if(mp.find(path)!=mp.end())
-            return true;
-        else
-            return false;
+       return mp.count(path);
         
     }
-    bool solve(vector<string> &wordDict,string &s, int index,map<string,int>& mp,vector<int> &dp){
+    bool solve(vector<string> &wordDict,string &s, int index,unordered_set<string>& mp,vector<int> &dp){
         
         if(index==s.size())
             return dp[index]=true;
@@ -30,11 +27,11 @@ public:
     
     bool wordBreak(string s, vector<string>& wordDict) {
         
-        map<string,int> mp;
+        unordered_set<string> mp;
         for(auto c:wordDict){
-            mp[c]++;
+            mp.insert(c);
         }
-        int n =s.size();
+        int n=s.size();
 
         vector<int> dp(n+1,-1);
         
