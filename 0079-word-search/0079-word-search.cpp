@@ -1,46 +1,52 @@
 class Solution {
-public:
+    private:
+    bool check(int row,int col,int n, int m){
+    return row>=0 and row<n and col>=0 and col<m;
+}
+bool helper(int row,int col,int n, int m,vector<vector<char>> &board,string &word,vector<vector<int>> &vis,int index){
+    if(index==word.size()) return true;
+    
+   
 
-    bool possible(vector<vector<char>>&board,string word,int i, int j, int index){
-        if (index == word.length())
+    int dr[]={-1,0,1,0,-1};
+    
+
+    for(int i=0;i<4;i++){
+        int nrow=row+dr[i];
+        int ncol=col+dr[i+1];
+
+        if(check(nrow,ncol,n,m) and board[nrow][ncol]==word[index] and vis[nrow][ncol]==0){
+            vis[nrow][ncol]=1;
+            
+            if(helper(nrow,ncol,n,m,board,word,vis,index+1))
             return true;
-
-        if(i<0 or j<0 or i>=board.size() or j>=board[0].size() or board[i][j]!=word[index] or board[i][j]=='!')
-        return false;
-
-        char c=board[i][j];
-        board[i][j]='!';
-
-        bool up=possible(board,word,i-1,j,index+1);
-        bool down=possible(board,word,i+1,j,index+1);
-        bool left=possible(board,word,i,j-1,index+1);
-        bool right=possible(board,word,i,j+1,index+1);
-
-        board[i][j]=c;
-        
-        return up or down or left or right;
+            vis[nrow][ncol]=0;
+        }
     }
-
-    bool solve(vector<vector<char>>&board,string word,int index){
-        int m=board.size();
-        int n=board[0].size();
-
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                if(board[i][j]==word[index]){
-                    if(possible(board,word,i,j,index))
-                    return true;
+    
+    return false;
+}
+public:
+    bool exist(vector<vector<char>>& board, string word) {
+        int n=board.size();
+        int m=board[0].size();
+        vector<vector<int>> vis(n,vector<int>(m,0));
+    
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(board[i][j]==word[0]){
+                    vis[i][j]=1;
+                    
+                    if(helper(i,j,n,m,board,word,vis,1))
+                        return true;
+                        
+                    vis[i][j]=0;
                 }
+                
             }
         }
         return false;
     }
-    bool exist(vector<vector<char>>& board, string word) {
-        int index=0;
-        int flag=solve(board,word,index);
-        if(flag)
-        return true;
-        else
-        return false;
-    }
+    
+    
 };
