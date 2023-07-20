@@ -19,9 +19,10 @@ class Solution{
             if(check(node,i,graph,n,color)){
                 color[node]=i;
                 if(possible(node+1,graph,m,n,color)) return true;
-                color[node]=0;
+                
             }
         }
+        color[node]=0;
         
         return false;
     }
