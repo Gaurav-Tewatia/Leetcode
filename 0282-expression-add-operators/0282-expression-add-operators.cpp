@@ -1,6 +1,6 @@
 class Solution {
     private:
-    void helper(int i,int n,string &num,string s,vector<string> &ans,long long cursum,long long prevnum,int target){
+    void helper(int i,int n,string &num,string s,vector<string> &ans,long long cursum,int prevnum,int target){
         if(i==n){
             if(cursum==target) ans.push_back(s);
             
