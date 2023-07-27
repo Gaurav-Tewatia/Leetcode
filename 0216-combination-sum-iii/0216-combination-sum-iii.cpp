@@ -1,26 +1,24 @@
 class Solution {
     private:
-    void helper(int i,int n,int k,vector<int> &v,vector<vector<int>> &ans){
+    void helper(int i,int k,int sum,vector<int> &v,vector<vector<int>> &ans){
         if(v.size()==k){
-            if(n==0) ans.push_back(v);
-            
+            if(sum==0)
+            ans.push_back(v);
             return;
         }
+        
         for(int j=i;j<=9;j++){
-            if(j<=n){
-                n-=j;
-                v.push_back(j);
-                helper(j+1,n,k,v,ans);
-                v.pop_back();
-                n+=j;
-            }
+            if(j>sum) break;
+            v.push_back(j);
+            helper(j+1,k,sum-j,v,ans);
+            v.pop_back();
         }
     }
 public:
     vector<vector<int>> combinationSum3(int k, int n) {
         vector<vector<int>> ans;
         vector<int> v;
-        helper(1,n,k,v,ans);
+        helper(1,k,n,v,ans);
         return ans;
     }
 };
