@@ -5,7 +5,7 @@ class Solution {
         }
         return true;
     }
-    void helper(int i,int n, string &str,vector<string> &v,vector<vector<string>> &ans,string &s){
+    void helper(int i,int n,vector<string> &v,vector<vector<string>> &ans,string &s){
         if(i==n){
             ans.push_back(v);
             return;
@@ -14,7 +14,7 @@ class Solution {
         for(int j=i;j<n;j++){
             if(check(i,j,s)){
                 v.push_back(s.substr(i,j-i+1));
-                helper(j+1,n,str,v,ans,s);
+                helper(j+1,n,v,ans,s);
                 v.pop_back();
             }
         }
@@ -24,8 +24,8 @@ public:
         vector<vector<string>> ans;
         int n=s.size();
         vector<string> v;
-        string str;
-        helper(0,n,str,v,ans,s);
+        
+        helper(0,n,v,ans,s);
         return ans;
     }
 };
