@@ -1,6 +1,6 @@
 class Solution {
     private:
-    void helper(int i,int n,vector<int> &nums,vector<int> &v,vector<vector<int>> &ans){
+    void helper(int i,int n, vector<int> &nums,vector<int> &v,vector<vector<int>> &ans){
         ans.push_back(v);
         
         for(int j=i;j<n;j++){
@@ -12,10 +12,10 @@ class Solution {
     }
 public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
         vector<vector<int>> ans;
         vector<int> v;
         int n=nums.size();
-        sort(nums.begin(),nums.end());
         helper(0,n,nums,v,ans);
         return ans;
     }
