@@ -3,64 +3,30 @@
 using namespace std;
 
 // } Driver Code Ends
-
 class Solution {
-    private:
-        bool checkbfs(int start,int vis[], vector<int> adj[]){
-            vis[start]=1;
-            queue<pair<int,int>> q;
-            q.push({start,-1});
-            
-            while(!q.empty()){
-                int a=q.front().first;
-                int parent=q.front().second;
-                
-                q.pop();
-                for(auto c:adj[a]){
-                    if(!vis[c]){
-                        vis[c]=1;
-                        q.push({c,a});
-                    }
-                    else{
-                        if(parent!=c)
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
+    bool dfs(int node,int parent, vector<int> adj[],vector<int> &vis){
+        vis[node]=1;
         
-        bool checkdfs(int start,int parent,int vis[], vector<int> adj[]){
-            vis[start]=1;
-            
-            
-            for(auto c:adj[start]){
-                if(!vis[c]){
-                    if(checkdfs(c,start,vis,adj))
-                    return true;
-                }
-                else if(parent!=c)
-                return true;
-            }
-            return false;
+        for(auto it:adj[node]){
+            if(!vis[it]){
+                if(dfs(it,node,adj,vis)) return true;
+            }else if(it!=parent) return true;
         }
+        return false;
+    }
   public:
     // Function to detect cycle in an undirected graph.
     bool isCycle(int V, vector<int> adj[]) {
-        int vis[V]={0};
+        vector<int> vis(V,0);
         for(int i=0;i<V;i++){
-            if(!vis[i]){
-                if(/*checkbfs(i,vis,adj)*/ checkdfs(i,-1,vis,adj))
-                return true;
-            }
+            if(!vis[i])
+            if(dfs(i,-1,adj,vis)) return true;
         }
+        
         return false;
-        
-        
-        
     }
+    
 };
-
 
 //{ Driver Code Starts.
 int main() {
