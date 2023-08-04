@@ -64,43 +64,43 @@ vector<int> rank, size,parent;
    
 
 };
-
 class Solution {
   public:
     vector<int> numOfIslands(int n, int m, vector<vector<int>> &operators) {
-        vector<vector<int>> arr(n,vector<int>(m,0));
-        
-        disjoint ds(n*m);
-        
         vector<int> ans;
-        int dr[]={-1,0,1,0};
-        int dc[]={0,1,0,-1};
-        int cnt=0;
-        for(auto c:operators){
-            int row=c[0];
-            int col=c[1];
-            if(arr[row][col]==1)
-            {
-                ans.push_back(cnt);
-                continue;
-            }
-            arr[row][col]=1;
-            int node=row*m+col;
-            cnt++;
-            for(int i=0;i<4;i++){
-                int nrow=row+dr[i];
-                int ncol=col+dc[i];
-                int newnode=nrow*m+ncol;
-                if(nrow>=0 and nrow<n and ncol>=0 and ncol<m and arr[nrow][ncol]==1
-                and ds.findparent(newnode)!=ds.findparent(node)){
-                    cnt--;
-                    ds.unionbysize(node,newnode);
-                }
-            }
+    disjoint ds(n*m);
+    int cnt=0;
+    vector<vector<int>> vis(n,vector<int> (m,0));
+
+    for(auto it:operators){
+        int row=it[0];
+        int col=it[1];
+        if(vis[row][col]==1){
             ans.push_back(cnt);
+            continue;
         }
-        
-        return ans;
+        vis[row][col]=1;
+         cnt++;
+         int node=row*m+col;
+         
+         int dr[]={-1,0,1,0,-1};
+         for(int i=0;i<4;i++){
+             int nrow=row+dr[i];
+             int ncol=col+dr[i+1];
+
+             if(nrow>=0 and nrow<n and ncol>=0 and ncol<m and vis[nrow][ncol]==1){
+                 int adjnode=nrow*m+ncol;
+                 if(ds.findparent(node)!=ds.findparent(adjnode)){
+                     cnt--;
+                     ds.unionbysize(adjnode,node);
+                 }
+                 
+             }
+         }
+         ans.push_back(cnt);
+    }
+
+    return ans;
     }
 };
 
