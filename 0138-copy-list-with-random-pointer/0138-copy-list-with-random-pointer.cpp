@@ -17,38 +17,21 @@ public:
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        Node*itr=head;
-        
-        //creating duplicate nodes 
-        while(itr){
-            Node*n=new Node(itr->val);
-            n->next=itr->next;
-            itr->next=n;
-            itr=itr->next->next;
+        unordered_map<Node*,Node*> mp;
+        Node*temp=head;
+        while(temp!=NULL){
+            Node*n=new Node(temp->val);
+            mp[temp]=n;
+            temp=temp->next;
         }
         
-        //adding random pointers in duplicate node
-        itr=head;
-        while(itr){
-            if(itr->random){
-                itr->next->random=itr->random->next;
-            }
-            itr=itr->next->next;
+        temp=head;
+        while(temp!=NULL){
+            Node*n=mp[temp];
+            n->next=temp->next!=NULL?mp[temp->next]:NULL;
+            n->random=temp->random!=NULL?mp[temp->random]:NULL;
+            temp=temp->next;
         }
-        
-        //separating the duplicate node from original nodes
-
-        Node*dummy=new Node(0);
-        Node*copy=dummy;
-        itr=head;
-        while(itr){
-            copy->next=itr->next;
-            Node*front=itr->next->next;
-            itr->next=front;
-            copy=copy->next;
-            itr=front;
-        }
-        
-        return dummy->next;
+        return mp[head];
     }
 };
