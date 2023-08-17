@@ -9,18 +9,23 @@
  * };
  */
 class Solution {
+    int length(const ListNode*head) const{
+        int len=1;
+        while(head->next) {
+len++;
+        head=head->next;
+        }
+        return len;
+    }
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
+        if(head==NULL or head->next==NULL or k==0 or k==1) return head;
         
+        int len=length(head);
         ListNode*dummy=new ListNode(0);
-        ListNode*pre=dummy,*curr=dummy,*nex=dummy,*temp=head;
         dummy->next=head;
-        int cnt=1;
-        while(temp->next){
-            cnt++;
-            temp=temp->next;
-        }
-        while(cnt>=k){
+        ListNode*nex,*curr,*pre=dummy;
+        while(len>=k){
             curr=pre->next;
             nex=curr->next;
             for(int i=1;i<k;i++){
@@ -30,7 +35,7 @@ public:
                 nex=curr->next;
             }
             pre=curr;
-            cnt-=k;
+            len-=k;
         }
         return dummy->next;
     }
