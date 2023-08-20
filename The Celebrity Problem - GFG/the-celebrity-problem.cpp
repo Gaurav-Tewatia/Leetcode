@@ -39,21 +39,42 @@ class Solution
         // }
         // return -1;
     
+        //INDEGREE OUTDEGREE METHOD
+        // vector<int> indegree(n,0),outdegree(n,0);
+        // for(int i=0;i<n;i++){
+        //     for(int j=0;j<n;j++){
+        //         if(M[i][j]){
+        //             indegree[j]++;
+        //             outdegree[i]++;
+        //         }
+        //     }
+        // }
         
-        vector<int> indegree(n,0),outdegree(n,0);
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                if(M[i][j]){
-                    indegree[j]++;
-                    outdegree[i]++;
-                }
-            }
+        // for(int i=0;i<n;i++){
+        //     if(indegree[i]==n-1 and outdegree[i]==0) return i;
+        // }
+        // return -1;
+    
+        
+        stack<int> st;
+        for(int i=0;i<n;i++) st.push(i);
+        
+        while(st.size()>1){
+            int A=st.top();
+            st.pop();
+            int B=st.top();
+            st.pop();
+            if(M[A][B]) st.push(B);
+            else st.push(A);
         }
         
+        int c=st.top();
+        st.pop();
+        
         for(int i=0;i<n;i++){
-            if(indegree[i]==n-1 and outdegree[i]==0) return i;
+            if(i!=c and ( M[c][i] or !M[i][c])) return -1;
         }
-        return -1;
+        return c;
     }
 };
 
