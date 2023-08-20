@@ -78,33 +78,47 @@ class Solution
         // return c;
     
         
-        int r=0;
-        for(int i=1;i<n;i++){
-            if(M[r][i]){
-                M[r][r]=1;
-                r=i;
-            } 
-            else{
-                M[i][i]=1;
-            }
-        }
+        //optimizing space complexity
+        // int r=0;
+        // for(int i=1;i<n;i++){
+        //     if(M[r][i]){
+        //         M[r][r]=1;
+        //         r=i;
+        //     } 
+        //     else{
+        //         M[i][i]=1;
+        //     }
+        // }
         
-        int candidate;
+        // int candidate;
+        // for(int i=0;i<n;i++){
+        //     if(M[i][i]==0){
+        //         bool flag=1;
+        //         for(int j=0;j<n;j++){
+        //             if(i!=j and (!M[j][i] or M[i][j])){
+        //                 flag=0;
+        //                 break;
+        //             }
+        //         }
+        //         if(flag) return i;
+        //     }
+        // }
+        // return -1;
+        
+        
+    
+        
+        int left=0,right=n-1;
+        while(left<right){
+            if(M[left][right])left++;
+            else right--;
+        }
+        int candidate=left;
+        
         for(int i=0;i<n;i++){
-            if(M[i][i]==0){
-                bool flag=1;
-                for(int j=0;j<n;j++){
-                    if(i!=j and (!M[j][i] or M[i][j])){
-                        flag=0;
-                        break;
-                    }
-                }
-                if(flag) return i;
-            }
+            if(i!=candidate and (M[candidate][i] or !M[i][candidate])) return -1;
         }
-        return -1;
-        
-        
+        return candidate;
     }
 };
 
