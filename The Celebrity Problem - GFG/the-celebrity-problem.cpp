@@ -56,25 +56,55 @@ class Solution
         // return -1;
     
         
-        stack<int> st;
-        for(int i=0;i<n;i++) st.push(i);
+        //ELIMINATION METHOD
+        // stack<int> st;
+        // for(int i=0;i<n;i++) st.push(i);
         
-        while(st.size()>1){
-            int A=st.top();
-            st.pop();
-            int B=st.top();
-            st.pop();
-            if(M[A][B]) st.push(B);
-            else st.push(A);
+        // while(st.size()>1){
+        //     int A=st.top();
+        //     st.pop();
+        //     int B=st.top();
+        //     st.pop();
+        //     if(M[A][B]) st.push(B);
+        //     else st.push(A);
+        // }
+        
+        // int c=st.top();
+        // st.pop();
+        
+        // for(int i=0;i<n;i++){
+        //     if(i!=c and ( M[c][i] or !M[i][c])) return -1;
+        // }
+        // return c;
+    
+        
+        int r=0;
+        for(int i=1;i<n;i++){
+            if(M[r][i]){
+                M[r][r]=1;
+                r=i;
+            } 
+            else{
+                M[i][i]=1;
+            }
         }
         
-        int c=st.top();
-        st.pop();
-        
+        int candidate;
         for(int i=0;i<n;i++){
-            if(i!=c and ( M[c][i] or !M[i][c])) return -1;
+            if(M[i][i]==0){
+                bool flag=1;
+                for(int j=0;j<n;j++){
+                    if(i!=j and (!M[j][i] or M[i][j])){
+                        flag=0;
+                        break;
+                    }
+                }
+                if(flag) return i;
+            }
         }
-        return c;
+        return -1;
+        
+        
     }
 };
 
