@@ -13,27 +13,28 @@ class Solution
     //Function to find if there is a celebrity in the party or not.
     int celebrity(vector<vector<int> >& M, int n) 
     {
-       vector<int>adj[n+1];
+        vector<int> adj[n+1];
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
-                if(M[i][j]==1){
-                    adj[i].push_back(j);
-                }
+                if(i==j) continue;
+                if(M[i][j]==1) adj[i].push_back(j);
             }
         }
-        vector<int>::iterator it;
+        vector<int> ::iterator it;
         for(int i=0;i<n;i++){
             if(adj[i].empty()){
                 bool flag=1;
                 for(int j=0;j<n;j++){
-                    if(i==j)continue;
-                    it=find(adj[j].begin(),adj[j].end(),i);
-                    if(it==adj[j].end()){
-                        flag=0;
-                        break;
+                    if(j!=i){
+                        it=find(adj[j].begin(),adj[j].end(),i);
+                        if(it==adj[j].end()){
+                             flag=0;
+                             break;
+                        }
+                       
                     }
                 }
-                if(flag)return i;
+                if(flag) return i;
             }
         }
         return -1;
