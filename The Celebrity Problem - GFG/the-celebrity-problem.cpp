@@ -107,13 +107,13 @@ class Solution
         
         
     
-        
+          //optimized space compleixty
         int left=0,right=n-1;
         while(left<right){
             if(M[left][right])left++;
             else right--;
         }
-        int candidate=left;
+        int candidate=right;
         
         for(int i=0;i<n;i++){
             if(i!=candidate and (M[candidate][i] or !M[i][candidate])) return -1;
