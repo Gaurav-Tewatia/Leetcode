@@ -1,59 +1,47 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        string ans="";
-        int first=0,second=0;
-        int mini=INT_MAX;
-        
-        if(t.size()>s.size())
-            return ans;
-        int i=0,j=0;
-        
-        unordered_map<char,int> mp;
-        for(auto c: t)
-            mp[c]++;
-        
         int n=s.size();
-        int count=mp.size();
+        int m=t.size();
+        if(n<m) return "";
+        if(n==m){
+            if(s==t) return t;
+            
+        }
         
+        int i=0,j=0;
+        unordered_map<char,int> mp;
+        for(const auto &it:t) mp[it]++;
+        
+        int count=mp.size();
+        int start,end,ans=INT_MAX;
         while(j<n){
-            if(mp.find(s[j])!=mp.end())
-            {
+            if(mp.count(s[j])){
                 mp[s[j]]--;
-                if(mp[s[j]]==0)
-                    count--;
+                if(mp[s[j]]==0) count--;
             }
-            
-            
             if(count==0){
-                
+               
                 while(count==0){
-                    if(mini>j-i+1){
-                    first=i;
-                    second=j;
-                    mini=j-i+1;
-                }
-                    if(mp.find(s[i])!=mp.end()){
+                    if(ans>j-i+1){
+                        start=i;
+                        end=j;
+                        ans=min(ans,j-i+1);
+                    }
+                    if(mp.count(s[i])){
                         mp[s[i]]++;
-                        if(mp[s[i]]==1)
-                            count++;
+                        if(mp[s[i]]==1) count++;
                     }
                     i++;
+                    
                 }
                 
             }
             j++;
-            
         }
-         if(mini!=INT_MAX){
-            for(int i=first;i<=second;i++){
-                        ans+=s[i];
-            }
-         }
-        
-        
-        return ans;
-        
-        
+        if(ans==INT_MAX) return "";
+        string str;
+        for(int k=start;k<=end;k++) str.push_back(s[k]);
+        return str;
     }
 };
